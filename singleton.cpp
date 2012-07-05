@@ -3,6 +3,7 @@
 C_Renderer* C_Singleton::m_Renderer;
 C_InputHandler* C_Singleton::m_InputHandler;
 C_ShaderManager* C_Singleton::m_ShaderManager;
+C_ModelManager* C_Singleton::m_ModelManager;
 
 C_Renderer* C_Singleton::M_Renderer()
 {
@@ -19,11 +20,17 @@ C_ShaderManager* C_Singleton::M_ShaderManager()
 	if(!m_ShaderManager) m_ShaderManager = new C_ShaderManager;
 	return m_ShaderManager;
 }
+C_ModelManager* C_Singleton::M_ModelManager()
+{
+	if(!m_ModelManager) m_ModelManager = new C_ModelManager;
+	return m_ModelManager;
+}
 
 void C_Singleton::M_DestroySingletons()
 {
 	if(m_Renderer) delete m_Renderer;
 	if(m_InputHandler) delete m_InputHandler;
 	if(m_ShaderManager) delete m_ShaderManager;
+	if(m_ModelManager) delete m_ModelManager;
 }
 

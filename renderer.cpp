@@ -27,6 +27,10 @@ C_Renderer::C_Renderer(unsigned width, unsigned height)
 		throw std::runtime_error("OpenGL 3.3 is not supported.");
 	}
 	glClearColor(0.0f, 0.0f, 0.3f, 0.0f);
+
+	glGenVertexArrays(1,&m_VertexArray);
+	glBindVertexArray(m_VertexArray);
+
 	std::cout << "OK!" << std::endl;
 }
 

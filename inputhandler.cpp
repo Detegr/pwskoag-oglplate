@@ -15,7 +15,7 @@ void C_InputHandler::M_HandleKey(int key, int state)
 		case GLFW_KEY_ESC: k=ESC; break;
 		default: k=(Key)-1;
 	}
-	if(k!=-1) m_KeysDown[k]=GLFW_PRESS?true:false;
+	if(k!=-1) m_KeysDown[k]=state==GLFW_PRESS?true:false;
 }
 
 bool C_InputHandler::M_Get(Key k)

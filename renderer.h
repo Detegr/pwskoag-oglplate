@@ -6,6 +6,7 @@
 class C_Renderer
 {
 	private:
+		GLuint m_VertexArray;
 		friend class C_Singleton;
 		C_Renderer(unsigned width, unsigned height);
 		~C_Renderer();

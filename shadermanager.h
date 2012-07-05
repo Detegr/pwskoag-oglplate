@@ -11,6 +11,7 @@ class C_Shader
 		std::string m_Name;
 		GLuint m_ProgId;
 	public:
+		C_Shader() : m_Name(), m_ProgId(0) {}
 		C_Shader(const std::string& name, GLuint progid) :
 			m_Name(name), m_ProgId(progid) {}
 		void M_Clear() { glDeleteShader(m_ProgId); m_ProgId=0; }
@@ -36,7 +37,6 @@ class C_ShaderManager
 			}
 			std::cout << "OK!" << std::endl;
 		}
-		std::string M_ReadFile(const std::string& path);
 		std::vector<C_Shader> m_Shaders;
 		bool M_CheckResult(GLuint id, GLuint status);
 	public:

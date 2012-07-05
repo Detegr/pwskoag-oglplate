@@ -1,28 +1,10 @@
 #include "shadermanager.h"
-#include <fstream>
+#include "filereader.h"
+#include <stdexcept>
 
 void C_Shader::M_Use() const
 {
 	glUseProgram(m_ProgId);
-}
-
-std::string C_ShaderManager::M_ReadFile(const std::string& path)
-{
-	std::ifstream i(path.c_str(), std::ifstream::in);
-	std::string out;
-	if(i.is_open())
-	{
-		std::string line;
-		while(i.good())
-		{
-			while(getline(i, line))
-			{
-				out += "\n" + line;
-			}
-		}
-	}
-	i.close();
-	return out;
 }
 
 bool C_ShaderManager::M_CheckResult(GLuint id, GLuint status)
@@ -50,8 +32,8 @@ bool C_ShaderManager::M_Load(const std::string& name)
 	GLuint vertid = glCreateShader(GL_VERTEX_SHADER);
 	GLuint fragid = glCreateShader(GL_FRAGMENT_SHADER);
 
-	std::string vert = M_ReadFile(name+".vert");
-	std::string frag = M_ReadFile(name+".frag");
+	std::string vert = C_FileReader::M_ReadToStr(name+".vert");
+	std::string frag = C_FileReader::M_ReadToStr(name+".frag");
 	if(!(frag.length() || vert.length())) return false;
 
 	std::cout << name << ".vert..." << std::flush;
@@ -87,4 +69,5 @@ const C_Shader& C_ShaderManager::M_Get(const std::string& name) const
 	{
 		if(it->M_Name() == name) return *it;
 	}
+	throw std::runtime_error("Shader " + name + " does not exist!");
 }

@@ -2,15 +2,19 @@
 #include <stdexcept>
 #include "singleton.h"
 #include "renderer.h"
+#include <cstdlib>
 
 int main()
 {
 	bool run=true;
 	/*C_Renderer* r = */C_Singleton::M_Renderer();
 	C_ShaderManager* s = C_Singleton::M_ShaderManager();
-	if(s->M_Load("minimal")) s->M_Get("minimal").M_Use();
+	if(s->M_Load("minimal"))
+	{
+		s->M_Get("minimal").M_Use();
+	} else exit(1);
 	C_ModelManager* m = C_Singleton::M_ModelManager();
-	m->M_Load("triangle", "test.2dmodel");
+	if(!m->M_Load("triangle", "test.2dmodel")) exit(1);
 	C_Model mod=m->M_Get("triangle");
 	while(run)
 	{

@@ -31,6 +31,17 @@ C_Renderer::C_Renderer(unsigned width, unsigned height)
 	glGenVertexArrays(1,&m_VertexArray);
 	glBindVertexArray(m_VertexArray);
 
+/*
+	glLineWidth(10.0f);
+	glPointSize(10.0f);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_LINE_SMOOTH);
+	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+	glDisable(GL_CULL_FACE);
+*/
+
 	std::cout << "OK!" << std::endl;
 }
 

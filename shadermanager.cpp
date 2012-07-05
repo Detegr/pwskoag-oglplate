@@ -10,7 +10,7 @@ void C_Shader::M_Use() const
 bool C_ShaderManager::M_CheckResult(GLuint id, GLuint status)
 {
 	GLint result = GL_FALSE;
-	int infologlength;
+	int infologlength=0;
 
 	glGetShaderiv(id, status, &result);
 	glGetShaderiv(id, GL_INFO_LOG_LENGTH, &infologlength);
@@ -18,7 +18,7 @@ bool C_ShaderManager::M_CheckResult(GLuint id, GLuint status)
 	{
 		std::string infolog(infologlength, ' ');
 		glGetShaderInfoLog(id, infologlength, NULL, &infolog[0]);
-		std::cout << "FAILED!" << std::endl;
+		std::cout << "FAILED! Info log length: " << infologlength << " rows." << std::endl;
 		std::cout << "==== INFOLOG ====" << std::endl;
 		std::cout << infolog << std::endl;
 		return false;

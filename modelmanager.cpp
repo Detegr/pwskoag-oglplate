@@ -8,8 +8,8 @@ void C_Model::M_Draw() const
 {
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, m_Vbo);
-	glVertexAttribPointer(0,m_Vertices,GL_FLOAT,GL_FALSE,0,(void*)0);
-	glDrawArrays(GL_TRIANGLES,0,m_Vertices);
+	glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,(void*)0);
+	glDrawArrays(GL_TRIANGLE_STRIP,0,m_Vertices);
 	glDisableVertexAttribArray(0);
 }
 
@@ -39,11 +39,18 @@ bool C_ModelManager::M_Load(const std::string& name, const std::string& path)
 		verts.push_back(val);
 	}
 	verts.push_back(0.0f);
-	m_Models.push_back(C_Model(name, 0, verts.size()/3));
+	GLfloat g[64];
+	for(unsigned int i=0; i<verts.size(); ++i)
+	{
+		g[i]=verts[i];
+	}
 
-	glGenBuffers(1, &m_Models.back().m_Vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, m_Models.back().m_Vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*verts.size(), &verts[0], GL_STATIC_DRAW);
+	GLuint vbo;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*verts.size(), g, GL_STATIC_DRAW);
+
+	m_Models.push_back(C_Model(name, vbo, verts.size()/3));
 
 	return true;
 }

@@ -25,13 +25,20 @@ bool C_ModelManager::M_Load(const std::string& name, const std::string& path)
 	ss.precision(2);
 	float val=0;
 	std::vector<GLfloat> verts;
-	for(std::vector<std::string>::iterator it=f.begin(); it!=f.end(); ++it)
+	int i=0;
+	for(std::vector<std::string>::iterator it=f.begin(); it!=f.end(); ++it, ++i)
 	{
 		ss.clear();
 		ss << *it;
 		ss >> val;
+		if(i==2)
+		{//Every third vertex will be 0.0 as we are supporting 2D only
+			verts.push_back(0.0f);
+			i=0;
+		}
 		verts.push_back(val);
 	}
+	verts.push_back(0.0f);
 	m_Models.push_back(C_Model(name, 0, verts.size()/3));
 
 	glGenBuffers(1, &m_Models.back().m_Vbo);

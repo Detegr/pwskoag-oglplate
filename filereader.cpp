@@ -30,7 +30,7 @@ std::vector<std::string> C_FileReader::M_ReadToArray(const std::string& path)
 		{
 			while(getline(i, line))
 			{
-				out.push_back(line);
+				if(line[0]!='#') out.push_back(line);
 			}
 		}
 	}

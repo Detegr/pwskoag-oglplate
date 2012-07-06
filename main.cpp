@@ -15,7 +15,7 @@ int main()
 	} else exit(1);
 	C_ModelManager* m = C_Singleton::M_ModelManager();
 	if(!m->M_Load("triangle", "test.2dmodel")) exit(1);
-	C_Entity* e = new C_Entity(m->M_Get("triangle"), 0.285);
+	C_Entity* e = new C_Entity(m->M_Get("triangle"));
 	r->M_AddEntity(e);
 	while(run)
 	{

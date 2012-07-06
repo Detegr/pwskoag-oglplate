@@ -4,20 +4,6 @@
 #include <iostream>
 #include <stdexcept>
 
-void C_Model::M_Draw() const
-{
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, m_Vbo);
-	glVertexAttribPointer(0,C_ModelManager::COMPONENTS_PER_VERT,GL_FLOAT,GL_FALSE,0,(void*)0);
-	glDrawArrays(GL_TRIANGLE_STRIP,0,m_Vertices);
-	glDisableVertexAttribArray(0);
-}
-
-std::pair<GLuint,unsigned short> C_Model::M_Get() const
-{
-	return std::make_pair(m_Vbo, m_Vertices);
-}
-
 bool C_ModelManager::M_Load(const std::string& name, const std::string& path)
 {
 	std::vector<std::string> f=C_FileReader::M_ReadToArray(path);

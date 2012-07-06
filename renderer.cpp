@@ -53,7 +53,7 @@ void C_Renderer::M_Draw()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	for(std::vector<C_Entity*>::iterator it=m_Entities.begin(); it!=m_Entities.end(); ++it)
 	{
-		(*it)->M_Translate(0.0004f);
+		(*it)->M_Translate(0.0003f);
 		(*it)->M_Rotate(0.018f);
 		glm::mat4 MVP=m_Projection*m_View*(*it)->M_ModelMatrix();
 		glUniformMatrix4fv(m_MVP, 1, GL_FALSE, glm::value_ptr(MVP));

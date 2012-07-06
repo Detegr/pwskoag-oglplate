@@ -1,4 +1,4 @@
-CC=g++ -g3 -Wall -Wextra -Werror
+CC=g++ -g3 -Wall -Wextra -Werror -Wno-comment
 CFLAGS=-I/usr/local/include/GL -I/usr/local/include -L /usr/local/lib
 LIBS=-lGL -lGLU -lglfw -lXrandr
 SOURCES=main.cpp singleton.cpp renderer.cpp inputhandler.cpp shadermanager.cpp filereader.cpp modelmanager.cpp

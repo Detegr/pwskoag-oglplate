@@ -1,8 +1,11 @@
 #include "renderer.h"
 #include <iostream>
 #include <stdexcept>
+#include "glm/gtc/type_ptr.hpp"
 
-C_Renderer::C_Renderer(unsigned width, unsigned height)
+C_Renderer::C_Renderer(unsigned width, unsigned height) :
+	m_Projection(glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f)),
+	m_View(glm::lookAt(glm::vec3(0,0,3), glm::vec3(0,0,0), glm::vec3(0,1,0)))
 {
 	std::cout << "Initializing renderer..." << std::flush;
 	if(!glfwInit()) throw std::runtime_error("Could not initialize renderer.");
@@ -31,29 +34,46 @@ C_Renderer::C_Renderer(unsigned width, unsigned height)
 	glGenVertexArrays(1,&m_VertexArray);
 	glBindVertexArray(m_VertexArray);
 
-/*
-	glLineWidth(10.0f);
-	glPointSize(10.0f);
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_LINE_SMOOTH);
-	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
-	glDisable(GL_CULL_FACE);
-*/
 
 	std::cout << "OK!" << std::endl;
 }
 
+void C_Renderer::M_Use(const C_Shader& s)
+{
+	m_CurrentShader=s.M_Id();
+	glUseProgram(m_CurrentShader);
+	m_MVP = glGetUniformLocation(m_CurrentShader, "MVP");
+}
+
 void C_Renderer::M_Draw()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	for(std::vector<C_Entity*>::iterator it=m_Entities.begin(); it!=m_Entities.end(); ++it)
+	{
+		(*it)->M_Translate(0.0004f);
+		(*it)->M_Rotate(0.018f);
+		glm::mat4 MVP=m_Projection*m_View*(*it)->M_ModelMatrix();
+		glUniformMatrix4fv(m_MVP, 1, GL_FALSE, glm::value_ptr(MVP));
+		(*it)->m_Model.M_Draw();
+	}
 	glfwSwapBuffers();
 }
 
 C_Renderer::~C_Renderer()
 {
 	std::cout << "Destroying renderer..." << std::flush;
+	for(std::vector<C_Entity*>::iterator it=m_Entities.begin(); it!=m_Entities.end(); ++it)
+	{
+		delete *it;
+	}
 	glfwTerminate();
 	std::cout << "OK!" << std::endl;
+}
+
+void C_Renderer::M_AddEntity(C_Entity* e)
+{
+	m_Entities.push_back(e);
 }

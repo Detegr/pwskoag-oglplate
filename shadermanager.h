@@ -16,7 +16,7 @@ class C_Shader
 			m_Name(name), m_ProgId(progid) {}
 		void M_Clear() { glDeleteShader(m_ProgId); m_ProgId=0; }
 		const std::string& M_Name() const { return m_Name; }
-		void M_Use() const;
+		GLuint M_Id() const { return m_ProgId; }
 };
 
 class C_ShaderManager

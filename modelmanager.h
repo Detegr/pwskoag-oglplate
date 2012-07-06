@@ -4,6 +4,8 @@
 #include <GL3/gl3.h>
 #include <vector>
 #include <iostream>
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 
 class C_Model
 {
@@ -32,4 +34,40 @@ class C_ModelManager
 	public:
 		bool M_Load(const std::string& name, const std::string& path);
 		const C_Model& M_Get(const std::string& model) const;
+};
+
+class C_Entity
+{
+	friend class C_Renderer;
+	private:
+		C_Model m_Model;
+		glm::mat4 m_ModelMatrix;
+	public:
+		C_Entity() : m_Model(), m_ModelMatrix(glm::mat4(1.0f)) {}
+		C_Entity(const C_Model& m) : m_Model(m), m_ModelMatrix(glm::mat4(1.0f)) {}
+		C_Entity(const C_Model& m, float initialscale) :
+			m_Model(m),
+			m_ModelMatrix(glm::mat4(1.0f))
+		{
+			M_Scale(initialscale);
+		}
+
+		void M_Translate(float amount)
+		{
+			m_ModelMatrix = glm::translate(m_ModelMatrix, glm::vec3(amount,amount,0.0f));
+		}
+
+		void M_Scale(float amount)
+		{
+			m_ModelMatrix = glm::scale(m_ModelMatrix, glm::vec3(amount));
+		}
+
+		void M_Rotate(float amount)
+		{
+			m_ModelMatrix = glm::rotate(m_ModelMatrix, amount, glm::vec3(0.0f, 0.0f, 1.0f));
+		}
+		const glm::mat4& M_ModelMatrix() const
+		{
+			return m_ModelMatrix;
+		}
 };

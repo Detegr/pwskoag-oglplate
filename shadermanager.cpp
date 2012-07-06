@@ -2,11 +2,6 @@
 #include "filereader.h"
 #include <stdexcept>
 
-void C_Shader::M_Use() const
-{
-	glUseProgram(m_ProgId);
-}
-
 bool C_ShaderManager::M_CheckResult(GLuint id, GLuint status)
 {
 	GLint result = GL_FALSE;

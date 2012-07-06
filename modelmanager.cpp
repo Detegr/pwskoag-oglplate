@@ -8,7 +8,7 @@ void C_Model::M_Draw() const
 {
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, m_Vbo);
-	glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,(void*)0);
+	glVertexAttribPointer(0,C_ModelManager::COMPONENTS_PER_VERT,GL_FLOAT,GL_FALSE,0,(void*)0);
 	glDrawArrays(GL_TRIANGLE_STRIP,0,m_Vertices);
 	glDisableVertexAttribArray(0);
 }
@@ -22,35 +22,24 @@ bool C_ModelManager::M_Load(const std::string& name, const std::string& path)
 {
 	std::vector<std::string> f=C_FileReader::M_ReadToArray(path);
 	std::stringstream ss;
-	ss.precision(2);
+	ss.precision(3); // Increase if more precision is needed.
+
 	float val=0;
 	std::vector<GLfloat> verts;
-	int i=0;
-	for(std::vector<std::string>::iterator it=f.begin(); it!=f.end(); ++it, ++i)
+	for(std::vector<std::string>::iterator it=f.begin(); it!=f.end(); ++it)
 	{
 		ss.clear();
 		ss << *it;
 		ss >> val;
-		if(i==2)
-		{//Every third vertex will be 0.0 as we are supporting 2D only
-			verts.push_back(0.0f);
-			i=0;
-		}
 		verts.push_back(val);
-	}
-	verts.push_back(0.0f);
-	GLfloat g[64];
-	for(unsigned int i=0; i<verts.size(); ++i)
-	{
-		g[i]=verts[i];
 	}
 
 	GLuint vbo;
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*verts.size(), g, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*verts.size(), &verts[0], GL_STATIC_DRAW);
 
-	m_Models.push_back(C_Model(name, vbo, verts.size()/3));
+	m_Models.push_back(C_Model(name, vbo, verts.size()/COMPONENTS_PER_VERT));
 
 	return true;
 }

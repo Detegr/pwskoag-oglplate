@@ -24,6 +24,7 @@ class C_Model
 class C_ModelManager
 {
 	friend class C_Singleton;
+	public: static const unsigned short COMPONENTS_PER_VERT=2; // Change this to 3 if using 3D models.
 	private:
 		C_ModelManager() { std::cout << "Initializing modelmanager...OK!" << std::endl; }
 		~C_ModelManager() { std::cout << "Destroying modelmanager...OK!" << std::endl; }

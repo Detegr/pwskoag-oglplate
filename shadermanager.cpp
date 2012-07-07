@@ -13,7 +13,7 @@ bool C_ShaderManager::M_CheckResult(GLuint id, GLuint status)
 	{
 		std::string infolog(infologlength, ' ');
 		glGetShaderInfoLog(id, infologlength, NULL, &infolog[0]);
-		std::cout << "FAILED! Info log length: " << infologlength << " rows." << std::endl;
+		std::cout << "FAILED! Info log length: " << infologlength << " characters." << std::endl;
 		std::cout << "==== INFOLOG ====" << std::endl;
 		std::cout << infolog << std::endl;
 		return false;

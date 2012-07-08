@@ -11,6 +11,7 @@ void C_Entity::M_Translate(float amount, unsigned char axis)
 	float yamount = y?amount:0.0f;
 	m_TranslationMatrix = glm::translate(m_TranslationMatrix, glm::vec3(xamount,yamount,0.0f));
 }
+
 void C_Entity::M_SetPosition(float amount, unsigned char axis)
 {
 	bool x=(axis|0xFE) == 0xFF;
@@ -19,6 +20,11 @@ void C_Entity::M_SetPosition(float amount, unsigned char axis)
 	float xamount = x?amount:0.0f;
 	float yamount = y?amount:0.0f;
 	m_TranslationMatrix = glm::translate(glm::mat4(1.0), glm::vec3(xamount,yamount,0.0f));
+}
+
+void C_Entity::M_SetPosition(float x, float y)
+{
+	m_TranslationMatrix = glm::translate(glm::mat4(1.0), glm::vec3(x,y,0.0f));
 }
 
 void C_Entity::M_Scale(float amount)

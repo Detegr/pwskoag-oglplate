@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include "entity.h"
+#include "singleton.h"
 
 class C_Physics
 {

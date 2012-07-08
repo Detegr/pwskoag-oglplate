@@ -23,6 +23,7 @@ class C_Entity
 		C_Entity(const C_Model& m);
 		void M_Translate(float amount, unsigned char axis);
 		void M_SetPosition(float amount, unsigned char axis);
+		void M_SetPosition(float x, float y);
 		void M_Scale(float amount);
 		void M_SetScale(float amount);
 		void M_Rotate(float amount);

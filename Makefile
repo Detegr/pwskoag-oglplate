@@ -1,7 +1,7 @@
 CC=g++ -Os -Wall -Wextra -Werror -Wno-comment
 CFLAGS=-I/usr/local/include/GL -I/usr/local/include -L /usr/local/lib
 LIBS=-framework OpenGL -framework Cocoa -lglfw -lBox2D
-SOURCES=main.cpp singleton.cpp renderer.cpp inputhandler.cpp shadermanager.cpp filereader.cpp modelmanager.cpp entity.cpp model.cpp physicsmanager.cpp physicalentity.cpp
+SOURCES=main.cpp singleton.cpp renderer.cpp inputhandler.cpp shadermanager.cpp filereader.cpp modelmanager.cpp entity.cpp model.cpp physicsmanager.cpp physicalentity.cpp timer.cpp
 HEADERS=$(SOURCES:.cpp=.h)
 OBJECTS=$(SOURCES:.cpp=.o)
 EXE=main

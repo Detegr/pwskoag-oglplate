@@ -1,8 +1,6 @@
 #include <iostream>
 #include <stdexcept>
 #include "singleton.h"
-#include <cstdlib>
-#include <cstring>
 
 int main()
 {

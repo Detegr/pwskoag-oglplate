@@ -3,9 +3,10 @@
 #include "inputhandler.h"
 #include "shadermanager.h"
 #include "modelmanager.h"
+#include "physicsmanager.h"
 
-#define DTGLIB_WINDOW_WIDTH 800
-#define DTGLIB_WINDOW_HEIGHT 600
+#define DTGLIB_WINDOW_WIDTH 1280
+#define DTGLIB_WINDOW_HEIGHT 800
 
 class C_Singleton
 {
@@ -14,11 +15,13 @@ class C_Singleton
 		static C_InputHandler* m_InputHandler;
 		static C_ShaderManager* m_ShaderManager;
 		static C_ModelManager* m_ModelManager;
+		static C_PhysicsManager* m_PhysicsManager;
 
 	public:
 		static C_Renderer* M_Renderer();
 		static C_InputHandler* M_InputHandler();
 		static C_ShaderManager* M_ShaderManager();
 		static C_ModelManager* M_ModelManager();
+		static C_PhysicsManager* M_PhysicsManager();
 		static void M_DestroySingletons();
 };

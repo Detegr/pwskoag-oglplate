@@ -42,15 +42,15 @@ int main()
 		r->M_Use(s->M_Get("minimal"));
 	} else exit(1);
 	C_ModelManager* m = C_Singleton::M_ModelManager();
-	if(!m->M_Load("triangle", "test2.2dmodel")) exit(1);
+	if(!m->M_Load("triangle", "test.2dmodel")) exit(1);
 	if(!m->M_Load("ground", "ground.2dmodel")) exit(1);
-	C_Entity* e = C_Entity::M_Create(m->M_Get("triangle"), 0.075f);
+	C_Entity* e = C_Entity::M_Create(m->M_Get("triangle"), 0.1f);
 	C_Entity* g = C_Entity::M_Create(m->M_Get("ground"), 1.0f);
 	C_Entity* g2 = C_Entity::M_Create(m->M_Get("ground"), 1.0f);
 	C_Entity* g3 = C_Entity::M_Create(m->M_Get("ground"), 0.585f);
 	e->M_SetPosition(0.0f,0.3f);
 	g->M_SetPosition(0.0f,1.0f);
-	g2->M_SetPosition(0.0f,-0.9f);
+	g2->M_SetPosition(0.0f,-1.0f);
 	g3->M_SetPosition(0.0f,0.123f);
 	p->M_CreateStaticEntity(g);
 	p->M_CreateStaticEntity(g2);

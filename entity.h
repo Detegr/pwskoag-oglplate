@@ -7,6 +7,7 @@
 class C_Entity
 {
 	friend class C_Renderer;
+	friend class C_PhysicalEntity;
 	friend class C_DynamicEntity;
 	friend class C_StaticEntity;
 	private:

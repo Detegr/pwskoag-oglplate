@@ -4,7 +4,7 @@ void C_PhysicalEntity::M_Sync()
 {
 	b2Vec2 pos=m_Body->GetPosition();
 	float32 ang=m_Body->GetAngle();
-	std::cout << m_Entity->M_ModelName() << " pos: " << pos.x << " " << pos.y << std::endl;
+	//std::cout << m_Entity->M_ModelName() << " pos: " << pos.x << " " << pos.y << std::endl;
 	float entityscale=this->m_Entity->M_Scale();
 	m_Entity->M_SetPosition(pos.x/entityscale/10.0f, pos.y/entityscale/10.0f);
 	m_Entity->M_SetRotation((180/3.14)*ang);

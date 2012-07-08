@@ -36,18 +36,19 @@ void C_PhysicsManager::M_Simulate()
 		C_DynamicEntity* de = dynamic_cast<C_DynamicEntity*>(*it);
 		if(de)
 		{
+			double dt=C_Singleton::M_Timer()->M_DT();
 			b2Body* b=de->M_Body();
 			float a = b->GetAngle();
 			b2Vec2 force = b2Vec2(-sin(a), cos(a));
-			force*=4.0f;
+			force*=5.0f*dt;
 
 			if(C_Singleton::M_InputHandler()->M_Get(LEFT))
 			{
-				b->SetAngularVelocity(1.0f);
+				b->SetAngularVelocity(2.5f*dt);
 			}
 			else if(C_Singleton::M_InputHandler()->M_Get(RIGHT))
 			{
-				b->SetAngularVelocity(-1.0f);
+				b->SetAngularVelocity(-2.5f*dt);
 			}
 			else b->SetAngularVelocity(0.0f);
 

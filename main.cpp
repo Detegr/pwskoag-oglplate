@@ -31,10 +31,10 @@ int main()
 	p->M_CreateDynamicEntity(e);
 	while(run)
 	{
+		glfwSleep(0.016f-t->M_DT());
 		t->M_SetTime();
 		p->M_Simulate();
 		r->M_Draw();
-		glfwSleep(0.01f);
 		run=!(C_Singleton::M_InputHandler()->M_Get(ESC));
 	}
 	C_Singleton::M_DestroySingletons();

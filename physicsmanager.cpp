@@ -29,26 +29,25 @@ C_DynamicEntity* C_PhysicsManager::M_CreateDynamicEntity(C_Entity* e)
 
 void C_PhysicsManager::M_Simulate()
 {
-	m_World.Step(m_TimeStep, m_VelocityIterations, m_PositionIterations);
+	double dt=C_Singleton::M_Timer()->M_DT();
 	for(std::vector<C_PhysicalEntity*>::iterator it=m_Bodies.begin(); it!=m_Bodies.end(); ++it)
 	{
 		(*it)->M_Sync();
 		C_DynamicEntity* de = dynamic_cast<C_DynamicEntity*>(*it);
 		if(de)
 		{
-			double dt=C_Singleton::M_Timer()->M_DT();
 			b2Body* b=de->M_Body();
 			float a = b->GetAngle();
 			b2Vec2 force = b2Vec2(-sin(a), cos(a));
-			force*=5.0f*dt;
+			force*=5.0f;
 
 			if(C_Singleton::M_InputHandler()->M_Get(LEFT))
 			{
-				b->SetAngularVelocity(2.5f*dt);
+				b->SetAngularVelocity(2.5f);
 			}
 			else if(C_Singleton::M_InputHandler()->M_Get(RIGHT))
 			{
-				b->SetAngularVelocity(-2.5f*dt);
+				b->SetAngularVelocity(-2.5f);
 			}
 			else b->SetAngularVelocity(0.0f);
 
@@ -58,4 +57,5 @@ void C_PhysicsManager::M_Simulate()
 			}
 		}
 	}
+	m_World.Step(m_TimeStep*dt, m_VelocityIterations, m_PositionIterations);
 }

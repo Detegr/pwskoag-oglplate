@@ -4,7 +4,8 @@
 #include "glm/gtc/type_ptr.hpp"
 
 C_Renderer::C_Renderer(unsigned width, unsigned height) :
-	m_Projection(glm::perspective(90.0f, 1.0f, 0.1f, 100.0f)),
+	m_AspectRatio((float)width/(float)height),
+	m_Projection(glm::perspective(90.0f, m_AspectRatio, 0.1f, 100.0f)),
 	m_View(glm::lookAt(glm::vec3(0,0,1), glm::vec3(0,0,0), glm::vec3(0,1,0)))
 {
 	std::cout << "Initializing renderer..." << std::flush;

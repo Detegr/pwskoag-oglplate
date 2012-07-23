@@ -9,12 +9,13 @@
 
 class C_Renderer
 {
+	friend class C_Singleton;
 	private:
-		GLuint m_VertexArray;
-		friend class C_Singleton;
 
+		public: float m_AspectRatio;
 		glm::mat4 m_Projection;
 		glm::mat4 m_View;
+		GLuint m_VertexArray;
 
 		GLuint m_CurrentShader;
 		GLuint m_MVP;

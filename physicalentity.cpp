@@ -20,7 +20,7 @@ C_StaticEntity::C_StaticEntity(b2World& w, C_Entity* e, float32 s)
 
 	b2PolygonShape hitshape;
 	float entityscale=this->m_Entity->M_Scale();
-	hitshape.SetAsBox(1.0f*entityscale*s, 0.05f*entityscale*s);
+	hitshape.SetAsBox((m_Entity->m_Model.M_Width()/2)*entityscale*s, (m_Entity->m_Model.M_Height()/2)*entityscale*s);
 	this->m_Body->CreateFixture(&hitshape, 0.0f);
 };
 
@@ -35,7 +35,8 @@ C_DynamicEntity::C_DynamicEntity(b2World& w, C_Entity* e, float32 s)
 	this->m_Body = w.CreateBody(&bodydef);
 
 	b2PolygonShape hitshape;
-	hitshape.SetAsBox(1.0f*entityscale*s, 0.75f*entityscale*s);
+	std::cout << m_Entity->m_Model.M_Width() << std::endl;
+	hitshape.SetAsBox((m_Entity->m_Model.M_Width()/2)*entityscale*s, (m_Entity->m_Model.M_Height()/2)*entityscale*s);
 
 	b2FixtureDef fix;
 	fix.shape=&hitshape;

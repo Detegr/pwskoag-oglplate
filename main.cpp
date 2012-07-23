@@ -17,7 +17,7 @@ int main()
 	C_ModelManager* m = C_Singleton::M_ModelManager();
 	if(!m->M_Load("triangle", "test.2dmodel")) exit(1);
 	if(!m->M_Load("ground", "ground.2dmodel")) exit(1);
-	C_Entity* e = C_Entity::M_Create(m->M_Get("triangle"), 0.05f);
+	C_Entity* e = C_Entity::M_Create(m->M_Get("triangle"), 0.08f);
 	C_Entity* g = C_Entity::M_Create(m->M_Get("ground"), 1.0f);
 	C_Entity* g2 = C_Entity::M_Create(m->M_Get("ground"), 1.0f);
 	C_Entity* g3 = C_Entity::M_Create(m->M_Get("ground"), 0.585f);
@@ -31,11 +31,11 @@ int main()
 	p->M_CreateDynamicEntity(e);
 	while(run)
 	{
-		glfwSleep(0.016f-t->M_DT());
 		t->M_SetTime();
 		p->M_Simulate();
 		r->M_Draw();
 		run=!(C_Singleton::M_InputHandler()->M_Get(ESC));
+		glfwSleep(0.001f);
 	}
 	C_Singleton::M_DestroySingletons();
 }

@@ -18,7 +18,7 @@ std::string C_FileReader::M_ReadToStr(const std::string& path)
 	i.close();
 	return out;
 }
-#include <iostream>
+
 std::vector<std::string> C_FileReader::M_ReadToArray(const std::string& path)
 {
 	std::ifstream i(path.c_str(), std::ifstream::in);

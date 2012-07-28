@@ -34,7 +34,7 @@ void C_PhysicsManager::M_Simulate()
 	{
 		(*it)->M_Sync();
 		C_DynamicEntity* de = dynamic_cast<C_DynamicEntity*>(*it);
-		if(de)
+		if(de && de->M_Controllable())
 		{
 			b2Body* b=de->M_Body();
 			float a = b->GetAngle();

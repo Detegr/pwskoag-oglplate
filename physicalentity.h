@@ -6,12 +6,15 @@
 class C_PhysicalEntity
 {
 	protected:
-		C_PhysicalEntity() : m_Body(NULL), m_Entity() {}
+		C_PhysicalEntity() : m_Body(NULL), m_Entity(NULL), m_Control(false) {}
 		b2Body* m_Body;
 		C_Entity* m_Entity;
+		bool m_Control;
 	public:
 		b2Body* M_Body() { return m_Body; }
 		virtual void M_Sync();
+		void M_Controllable(bool b) { m_Control=b; }
+		bool M_Controllable() const { return m_Control; }
 };
 
 class C_StaticEntity : public C_PhysicalEntity

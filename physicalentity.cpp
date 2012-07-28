@@ -35,7 +35,6 @@ C_DynamicEntity::C_DynamicEntity(b2World& w, C_Entity* e, float32 s)
 	this->m_Body = w.CreateBody(&bodydef);
 
 	b2PolygonShape hitshape;
-	std::cout << m_Entity->m_Model.M_Width() << std::endl;
 	hitshape.SetAsBox((m_Entity->m_Model.M_Width()/2)*entityscale*s, (m_Entity->m_Model.M_Height()/2)*entityscale*s);
 
 	b2FixtureDef fix;
